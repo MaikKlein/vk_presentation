@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1> Vulkan</h1>
+				</section>
+				<section>
+					<h2> Device</h2>
+					<ul>
+						<li>Physical and logical device</li>
+						<li>PhysicalDevice</li>
+						<ul>
+							<li>Available extensions </li>
+							<li>Features</li>
+							<li>Queues</li>
+							<li>...</li>
+						</ul>
+					</ul>
+				</section>
+
+				<section>
+					<h2> Queues </h2>
+					<ul>
+						<li> Multiple threads can submit work to a queue </li>
+						<li> Accepts work via CommandBuffer submission <li>
+						<li> Several types of queues. (Graphics, Compute, Transfer, SparseBinding) </li>
+						<li> Queues with less flags are more specialized. AMD offers compute and transfer queues</li>
+						<li> Submission includes synchronization primitives (Fences) </li>
+				</section>
+				<section>
+					<h2> CommandBuffer </h2>
+					<ul>
+						<li>Allocated from CommandPools</li>
+						<li>Records commands which can submitted to the GPU with a queue</li>
+						<li>Can execute secondary command buffers => Multi-threading</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Graphics Pipeline </h2>
+					<ul>
+						<li>Snapshot of all states: Shaders, DescriptorSets, Renderpass, fill mode, cull mode, depth range ...</li>
+						<li>Immutable and expensive to create </li>
+						<li>Can be cached with a PipelineCache</li>
+						<li>Some state can be dynamic (Viewport, DepthBias, Blend const ...) </li>
+					</ul>
+				</section>
+				<section>
+					<h2>SPIR-V</h2>
+					<ul>
+						<li>Inbetween ASM and GLSL</li>
+						<li>Can be compiled from GLSL with glslang</li>
+						<li>Allows multiple entry points in a single shader module => Code sharing </li>
+						<li>Can be translated into HLSL, MSL and GLSL with spirv-cross</li>
+						<li>Easier tooling </li>
+					</ul>
+				</section>
+				<section>
+					<h2>Buffers, Images and Memory </h2>
+					<ul>
+						<li>Buffers represent linear arrays of data</li>
+						<li>Buffers and images will not allocate memory</li>
+						<li>Memory has to be manually allocated and then bound the the buffer / image</li>
+						<li>There are many different heaps that can allocate memory. The developer has the choice (HostVisible, DeviceLocal...)</li>
+						<li>It is possible to suballocate many different buffers and images into one memory allocation</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Renderpass and Framebuffers </h2>
+					<ul>
+						<li>A Renderpass is just a collection of subpasses and attachments and describes how the attachments are used subpasses</li>
+						<li>A Framebuffer is a list of attachments </li>
+						<li>Subpasses can avoid memory writes for transient attachments</li>
+						<li>The disadvantage of subpasses is that they can only access one pixel</li>
+					</ul>
+				</section>
+				<section>
+					<h2> </h2>
+					<ul>
+						<li> </li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
