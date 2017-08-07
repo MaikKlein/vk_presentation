@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Vulkan</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -28,6 +28,26 @@
 					<h1> Vulkan</h1>
 				</section>
 				<section>
+					<h2>What is Vulkan? </h2>
+					<ul>
+						<li>Vulkan is a low level graphics and compute API</li>
+						<li>More low level than OpenGL</li>
+						<li>More control</li>
+						<li>Allows multi-threading</li>
+						<li>Simpler driver</li>
+					</ul>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/vk.png" alt="Down arrow">
+					</a>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/device.png" alt="Down arrow">
+					</a>
+				</section>
+				<section>
 					<h2> Device</h2>
 					<ul>
 						<li>Physical and logical device</li>
@@ -36,19 +56,30 @@
 							<li>Available extensions </li>
 							<li>Features</li>
 							<li>Queues</li>
+							<li>Limits</li>
 							<li>...</li>
 						</ul>
 					</ul>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/queue.png">
+					</a>
 				</section>
 
 				<section>
 					<h2> Queues </h2>
 					<ul>
 						<li> Multiple threads can submit work to a queue </li>
-						<li> Accepts work via CommandBuffer submission <li>
+						<li> Accepts work via CommandBuffer submission </li>
 						<li> Several types of queues. (Graphics, Compute, Transfer, SparseBinding) </li>
 						<li> Queues with less flags are more specialized. AMD offers compute and transfer queues</li>
 						<li> Submission includes synchronization primitives (Fences) </li>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/commandbuffer.png">
+					</a>
 				</section>
 				<section>
 					<h2> CommandBuffer </h2>
@@ -57,6 +88,11 @@
 						<li>Records commands which can submitted to the GPU with a queue</li>
 						<li>Can execute secondary command buffers => Multi-threading</li>
 					</ul>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/pipeline.png">
+					</a>
 				</section>
 				<section>
 					<h2>Graphics Pipeline </h2>
@@ -70,12 +106,17 @@
 				<section>
 					<h2>SPIR-V</h2>
 					<ul>
-						<li>Inbetween ASM and GLSL</li>
+						<li>In between ASM and GLSL</li>
 						<li>Can be compiled from GLSL with glslang</li>
-						<li>Allows multiple entry points in a single shader module => Code sharing </li>
 						<li>Can be translated into HLSL, MSL and GLSL with spirv-cross</li>
+						<li>Allows multiple entry points in a single shader module => Code sharing </li>
 						<li>Easier tooling </li>
 					</ul>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/buffer.png">
+					</a>
 				</section>
 				<section>
 					<h2>Buffers, Images and Memory </h2>
@@ -88,20 +129,61 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Renderpass and Framebuffers </h2>
+					<a href="#">
+							<img data-src="images/renderpass.png">
+					</a>
+				</section>
+				<section>
+					<h2>Renderpass</h2>
 					<ul>
-						<li>A Renderpass is just a collection of subpasses and attachments and describes how the attachments are used subpasses</li>
-						<li>A Framebuffer is a list of attachments </li>
-						<li>Subpasses can avoid memory writes for transient attachments</li>
+						<li>A Renderpass are chunks of back to back GPU work</li>
+						<li>All rendering happens inside a Renderpass</li>
+						<li>Renderpasses contain one or more subpasses </li>
+						<li>Subpasses can make rendering more efficient</li>
 						<li>The disadvantage of subpasses is that they can only access one pixel</li>
 					</ul>
 				</section>
 				<section>
-					<h2> </h2>
+					<h2>Renderpass</h2>
+					<a href="#" class="navigate-down">
+							<img data-src="images/subpass.png" alt="Down arrow">
+					</a>
+					<pre><code class="hljs" data-trim contenteditable>
+						layout (input_attachment_index = 0, binding = 0)
+							uniform subpassInput position;
+					</code></pre>
+				</section>
+				<section>
+					<h2>Framebuffer </h2>
 					<ul>
-						<li> </li>
+						<li>Is just a list of attachments</li>
+						<li>Used by a Renderpass instance</li>
 					</ul>
 				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/desc.png">
+					</a>
+				</section>
+				<section>
+				<section>
+					<h2>DescriptorSets </h2>
+					<ul>
+						<li>Allocated from DescriptorPool</li>
+						<li>Can describe different frequencies</li>
+						<li>Push constants with 128 bytes </li>
+						<li>Dynamic Uniform buffers </li>
+					</ul>
+				</section>
+				<section>
+					<a href="#">
+							<img data-src="images/vulkan_resbinding_layouts.png">
+					</a>
+				</section>
+				</section>
+				<section>
+					<h3> Questions?</h3>
+			</section>
 			</div>
 		</div>
 
